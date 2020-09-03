@@ -6,11 +6,18 @@ import com.exam.answerSheetContext.domain.model.answerSheet.AnswerSheetRepositor
 import com.exam.answerSheetContext.domain.model.answerSheet.exception.ResourceNotFoundException;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 @Component
 public class MemoryAnswerSheetRepository implements AnswerSheetRepository {
     private List<AnswerSheet> list;
+
+    public MemoryAnswerSheetRepository() {
+        this.list = new ArrayList<>();
+    }
 
     @Override
     public AnswerSheet find(AnswerSheetId answerSheetId) {
@@ -23,7 +30,7 @@ public class MemoryAnswerSheetRepository implements AnswerSheetRepository {
     @Override
     public void save(AnswerSheet answerSheet) {
         if (this.list.stream().anyMatch(answerSheetOld -> answerSheetOld.sameIdentityAs(answerSheet))) {
-            this.list.removeIf(answerSheetOld->answerSheetOld.sameIdentityAs(answerSheet));
+            this.list.removeIf(answerSheetOld -> answerSheetOld.sameIdentityAs(answerSheet));
         }
 
         this.list.add(answerSheet);

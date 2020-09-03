@@ -1,11 +1,15 @@
 package com.exam.answerSheetContext.application.command;
 
 import com.exam.answerSheetContext.domain.model.answerSheet.AnswerSheetId;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class HandInCommand {
     private AnswerSheetId answerSheetId;
 }

@@ -5,10 +5,7 @@ import com.exam.answerSheetContext.domain.model.answerSheet.exception.IllegalAns
 import com.exam.answerSheetContext.domain.model.answerSheet.exception.IllegalQuizzesCountException;
 import com.exam.answerSheetContext.domain.model.answerSheet.exception.IllegalScoreException;
 import com.exam.shared.Entity;
-import com.exam.shared.ValueObject;
-import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
 
 import java.util.List;
 import java.util.Optional;
@@ -74,7 +71,7 @@ public class AnswerSheet implements Entity<AnswerSheet> {
         this.answerSheetItems.forEach(answerSheetItem -> {
             Optional<BlankQuiz> optionalBlankQuiz = this.blankQuizzes.stream()
                     .filter(blankQuiz -> blankQuiz.getNumber() == answerSheetItem.getNumber()
-                            && blankQuiz.getAnswer().equals(answerSheetItem.getAnswer()))
+                            && blankQuiz.getReferenceAnswer().equals(answerSheetItem.getAnswer()))
                     .findFirst();
 
             if (optionalBlankQuiz.isPresent()) {
@@ -96,43 +93,7 @@ public class AnswerSheet implements Entity<AnswerSheet> {
         return this.answerSheetId.sameValueAs(other.answerSheetId);
     }
 
-    @Getter
-    @AllArgsConstructor
-    public class AnswerSheetItem implements ValueObject<AnswerSheetItem> {
-        private int number;
-        private String answer;
-        private int score;
-
-        @Override
-        public boolean sameValueAs(AnswerSheetItem other) {
-            return this.getNumber() == other.getNumber()
-                    && this.getAnswer().equals(other.getAnswer())
-                    && this.getScore() == other.getScore();
-        }
-
-        void setAnswer(String answer) {
-            this.answer = answer;
-        }
-
-        void setScore(int score) {
-            this.score = score;
-        }
-    }
-
-    @Getter
-    @AllArgsConstructor
-    public class BlankQuiz implements ValueObject<BlankQuiz> {
-        private int number;
-        private String answer;
-        private String referenceAnswer;
-        private int score;
-
-        @Override
-        public boolean sameValueAs(BlankQuiz other) {
-            return this.getNumber() == other.getNumber()
-                    && this.getAnswer().equals(other.getAnswer())
-                    && this.getScore() == other.getScore()
-                    && this.getReferenceAnswer().equals(other.getReferenceAnswer());
-        }
+    public int getScore() {
+        return this.score;
     }
 }

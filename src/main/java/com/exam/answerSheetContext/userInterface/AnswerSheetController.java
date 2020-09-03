@@ -4,10 +4,7 @@ import com.exam.answerSheetContext.application.AnswerSheetApplicationService;
 import com.exam.answerSheetContext.application.command.CreateCommand;
 import com.exam.answerSheetContext.application.command.HandInCommand;
 import com.exam.answerSheetContext.application.command.SubmitCommand;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/answer-sheets")
@@ -19,17 +16,17 @@ public class AnswerSheetController {
     }
 
     @PostMapping("/assign")
-    public void assign(CreateCommand createCommand){
+    public void assign(@RequestBody CreateCommand createCommand) {
         this.applicationService.assign(createCommand);
     }
 
     @PutMapping("/submit")
-    public void submit(SubmitCommand submitCommand){
+    public void submit(@RequestBody SubmitCommand submitCommand) {
         this.applicationService.submit(submitCommand);
     }
 
     @PutMapping("/hand-in")
-    public void handIn(HandInCommand handInCommand){
+    public void handIn(@RequestBody HandInCommand handInCommand) {
         this.applicationService.handIn(handInCommand);
     }
 }

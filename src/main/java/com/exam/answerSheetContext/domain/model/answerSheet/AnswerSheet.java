@@ -1,5 +1,9 @@
 package com.exam.answerSheetContext.domain.model.answerSheet;
 
+import com.exam.answerSheetContext.domain.model.answerSheet.exception.IllegalAnswerSheetItemNumberException;
+import com.exam.answerSheetContext.domain.model.answerSheet.exception.IllegalAnswerSheetItemsCountException;
+import com.exam.answerSheetContext.domain.model.answerSheet.exception.IllegalQuizzesCountException;
+import com.exam.answerSheetContext.domain.model.answerSheet.exception.IllegalScoreException;
 import com.exam.shared.Entity;
 import com.exam.shared.ValueObject;
 import lombok.AllArgsConstructor;
@@ -9,7 +13,7 @@ import lombok.Getter;
 import java.util.List;
 import java.util.Optional;
 
-@EqualsAndHashCode(of = {"blankQuizId"})
+@EqualsAndHashCode(of = {"answerSheetId"})
 public class AnswerSheet implements Entity<AnswerSheet> {
     private AnswerSheetId answerSheetId;
     private String studentId;
@@ -48,6 +52,10 @@ public class AnswerSheet implements Entity<AnswerSheet> {
         if (totalScore != 100) {
             throw new IllegalScoreException(totalScore);
         }
+    }
+
+    public AnswerSheetId getId() {
+        return this.answerSheetId;
     }
 
     public void submit(int number, String answer) {

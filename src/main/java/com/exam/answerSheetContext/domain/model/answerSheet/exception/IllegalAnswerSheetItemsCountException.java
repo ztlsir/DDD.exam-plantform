@@ -1,7 +1,7 @@
-package com.exam.answerSheetContext.domain.model.answerSheet;
+package com.exam.answerSheetContext.domain.model.answerSheet.exception;
 
 public class IllegalAnswerSheetItemsCountException extends IllegalArgumentException {
-    IllegalAnswerSheetItemsCountException(int size) {
+    public IllegalAnswerSheetItemsCountException(int size) {
         super("TooManyAnswerSheetItemsException: exception:5~20, actual:" + size);
     }
 }
